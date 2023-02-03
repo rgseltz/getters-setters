@@ -13,3 +13,5 @@ class Temperature {
     }
 }
 
+const tempBtn = document.querySelector('#temp-button');
+tempBtn.addEventListener('click', handleTemperature);
