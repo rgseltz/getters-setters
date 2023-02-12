@@ -15,8 +15,6 @@ class Temperature {
         return document.getElementById(`${id}`);
     }
     displayResults(celcius, farenheit) {
-        console.log('c', celcius);
-        console.log('f', farenheit);
         return document.getElementById('results').innerHTML = `Celcisus : ${celcius} | Farenheit : ${farenheit}`
     }
     handleTemperature() {
@@ -38,9 +36,7 @@ function initApp() {
 function clickHandler(evt) {
     evt.preventDefault();
     const temp = !document.getElementById('celcius-temp').value ? Temperature.fromFarenheit(document.getElementById('farenheit-temp').value) : new Temperature(document.getElementById('celcius-temp').value);
-    console.log(temp);
     temp.handleTemperature();
-    // temp.displayResults(temp.celcius, temp.farenheit);
 }
 initApp();
 
