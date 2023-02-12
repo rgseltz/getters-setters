@@ -30,9 +30,8 @@ class Temperature {
     }
 }
 
-const tempBtn = document.querySelector('#temp-button');
-
 function initApp() {
+    const tempBtn = document.querySelector('#temp-button');
     tempBtn.addEventListener('click', clickHandler);
 }
 
