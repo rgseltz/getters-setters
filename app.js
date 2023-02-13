@@ -13,12 +13,6 @@ class Temperature {
     }
 }
 class DomManager {
-    static handleCelciusEvent(e) {
-        e.preventDefault();
-        let tempObj = DomManager.createObj();
-        const { celcius, farenheit } = tempObj;
-        DomManager.displayResults(celcius, farenheit);
-    }
     static listenOnButton() {
         const btn = document.getElementById("temp-button");
         btn.addEventListener('click', this.handleClick)
