@@ -44,46 +44,22 @@ class DomManager {
     //     celciusInput = document.getElementById("celcius-temp");
     //     farenheitInput = document.getElementById("farenheit-temp");
     // }
-    static listenOnFarenheitInput() {
-        const farenheitInput = document.getElementById("farenheit-temp");
-        farenheitInput.addEventListener('change', this.celciusEvent);
-    }
-    static celciusEvent() {
-        const celciusBtn = document.getElementById('temp-button');
-        celciusBtn.addEventListener('click', this.handleCelciusEvent)
-    }
     static handleCelciusEvent(e) {
         e.preventDefault();
         let tempObj = DomManager.createObj();
         const { celcius, farenheit } = tempObj;
         DomManager.displayResults(celcius, farenheit);
     }
-    static listenOnCelciusInput() {
-        const celciusInput = document.getElementById("celcius-temp");
-        celciusInput.addEventListener('change', this.farenheitEvent)
-        this.farenheitEvent();
+    static listenOnButton() {
+        const btn = document.getElementById("temp-button");
+        btn.addEventListener('click', this.handleClick)
     }
-    static farenheitEvent() {
-        const farenheitBtn = document.getElementById("temp-button");
-        farenheitBtn.addEventListener('click', this.handleFarenheitEvent);
-    }
-    static listenOnInputs() {
-        const celciusInput = document.getElementById("celcius-temp");
-        const farenheitInput = documnet.getElementById("farenheit-temp");
-
-    }
-    static handleFarenheitEvent(e) {
+    static handleClick(e) {
         e.preventDefault();
         const tempObj = DomManager.createObj();
         const { celcius, farenheit } = tempObj;
         DomManager.displayResults(celcius, farenheit);
     }
-    // static handleEvent(e) {
-    //     e.preventDefault();
-    //     const tempObj = DomManager.createObj();
-    //     const { celcius, farenheit } = tempObj;
-    //     DomManager.displayResults(celcius, farenheit);
-    // }
     static createObj() {
         const celciusInput = document.getElementById("celcius-temp");
         const farenheitInput = document.getElementById("farenheit-temp");
@@ -97,7 +73,7 @@ class DomManager {
         return document.getElementById("results").innerText = `Celcius : ${celcius} | Farenheit : ${farenheit}`;
     }
 }
-DomManager.listenOnCelciusInput();
+DomManager.listenOnButton();
 
 
 
