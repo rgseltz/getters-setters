@@ -11,21 +11,21 @@ class Temperature {
     static fromFarenheit(value) {
         return new Temperature((value - 32) / 1.8);
     }
-    getElement(id) {
-        return document.getElementById(`${id}`);
-    }
-    displayResults(celcius, farenheit) {
-        return document.getElementById('results').innerHTML = `Celcisus : ${celcius} | Farenheit : ${farenheit}`
-    }
-    handleTemperature() {
-        const celciusInput = this.getElement('celcius-temp');
-        const farenheitInput = this.getElement('farenheit-temp');
-        // const temp = celcisusInput.value ? new Temperature(celcisusInput.value) : Temperature.fromFarenheit(farenheitInput.value);
-        farenheitInput.value = this.farenheit
-        this.displayResults(celciusInput.value || this.celcius, this.farenheit);
-        celciusInput.value = '';
-        farenheitInput.value = '';
-    }
+    // getElement(id) {
+    //     return document.getElementById(`${id}`);
+    // }
+    // displayResults(celcius, farenheit) {
+    //     return document.getElementById('results').innerHTML = `Celcisus : ${celcius} | Farenheit : ${farenheit}`
+    // }
+    // handleTemperature() {
+    //     const celciusInput = this.getElement('celcius-temp');
+    //     const farenheitInput = this.getElement('farenheit-temp');
+    //     // const temp = celcisusInput.value ? new Temperature(celcisusInput.value) : Temperature.fromFarenheit(farenheitInput.value);
+    //     farenheitInput.value = this.farenheit
+    //     this.displayResults(celciusInput.value || this.celcius, this.farenheit);
+    //     celciusInput.value = '';
+    //     farenheitInput.value = '';
+    // }
 }
 
 // function initApp() {
@@ -44,9 +44,20 @@ class DomManager {
     //     celciusInput = document.getElementById("celcius-temp");
     //     farenheitInput = document.getElementById("farenheit-temp");
     // }
-    // static listenOnFarenheitInput() {
-
-    // }
+    static listenOnFarenheitInput() {
+        const farenheitInput = document.getElementById("farenheit-temp");
+        farenheitInput.addEventListener('change', this.celciusEvent);
+    }
+    static celciusEvent() {
+        const celciusBtn = document.getElementById('temp-button');
+        celciusBtn.addEventListener('click', this.handleCelciusEvent)
+    }
+    static handleCelciusEvent(e) {
+        e.preventDefault();
+        let tempObj = DomManager.createObj();
+        const { celcius, farenheit } = tempObj;
+        DomManager.displayResults(celcius, farenheit);
+    }
     static listenOnCelciusInput() {
         const celciusInput = document.getElementById("celcius-temp");
         celciusInput.addEventListener('change', this.farenheitEvent)
@@ -56,16 +67,29 @@ class DomManager {
         const farenheitBtn = document.getElementById("temp-button");
         farenheitBtn.addEventListener('click', this.handleFarenheitEvent);
     }
+    static listenOnInputs() {
+        const celciusInput = document.getElementById("celcius-temp");
+        const farenheitInput = documnet.getElementById("farenheit-temp");
+
+    }
     static handleFarenheitEvent(e) {
         e.preventDefault();
-        const tempObj = DomManager.createFarenheitObj();
-        const celcius = tempObj.celcius;
-        const farenheit = tempObj.farenheit;
+        const tempObj = DomManager.createObj();
+        const { celcius, farenheit } = tempObj;
         DomManager.displayResults(celcius, farenheit);
     }
-    static createFarenheitObj() {
+    // static handleEvent(e) {
+    //     e.preventDefault();
+    //     const tempObj = DomManager.createObj();
+    //     const { celcius, farenheit } = tempObj;
+    //     DomManager.displayResults(celcius, farenheit);
+    // }
+    static createObj() {
         const celciusInput = document.getElementById("celcius-temp");
-        const tempObj = new Temperature(celciusInput.value);
+        const farenheitInput = document.getElementById("farenheit-temp");
+        console.log(farenheitInput.value);
+        let tempObj;
+        tempObj = celciusInput.value !== '' ? new Temperature(celciusInput.value) : Temperature.fromFarenheit(farenheitInput.value);
         console.log(tempObj);
         return tempObj;
     }
