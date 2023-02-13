@@ -19,17 +19,18 @@ class DomManager {
     }
     static handleClick(e) {
         e.preventDefault();
-        const tempObj = DomManager.createObj();
-        const { celcius, farenheit } = tempObj;
-        DomManager.displayResults(celcius, farenheit);
-    }
-    static createObj() {
         const celciusInput = document.getElementById("celcius-temp");
         const farenheitInput = document.getElementById("farenheit-temp");
+        const tempObj = DomManager.createObj(celciusInput, farenheitInput);
+        const { celcius, farenheit } = tempObj;
+        DomManager.displayResults(celcius, farenheit);
+        celciusInput.value = '';
+        farenheitInput.value = '';
+    }
+    static createObj(celciusInput, farenheitInput) {
         let tempObj;
         tempObj = celciusInput.value !== '' ? new Temperature(celciusInput.value) : Temperature.fromFarenheit(farenheitInput.value);
-        console.log(tempObj);
-        return tempObj;
+        return tempObj
     }
     static displayResults(celcius, farenheit) {
         return document.getElementById("results").innerText = `Celcius : ${celcius} | Farenheit : ${farenheit}`;
