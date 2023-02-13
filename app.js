@@ -28,17 +28,52 @@ class Temperature {
     }
 }
 
-function initApp() {
-    const tempBtn = document.querySelector('#temp-button');
-    tempBtn.addEventListener('click', clickHandler);
-}
+// function initApp() {
+//     const tempBtn = document.querySelector('#temp-button');
+//     tempBtn.addEventListener('click', clickHandler);
+// }
 
-function clickHandler(evt) {
-    evt.preventDefault();
-    const temp = !document.getElementById('celcius-temp').value ? Temperature.fromFarenheit(document.getElementById('farenheit-temp').value) : new Temperature(document.getElementById('celcius-temp').value);
-    temp.handleTemperature();
+// function clickHandler(evt) {
+//     evt.preventDefault();
+//     const temp = !document.getElementById('celcius-temp').value ? Temperature.fromFarenheit(document.getElementById('farenheit-temp').value) : new Temperature(document.getElementById('celcius-temp').value);
+//     temp.handleTemperature();
+// }
+// initApp();
+class DomManager {
+    // constructor() {
+    //     celciusInput = document.getElementById("celcius-temp");
+    //     farenheitInput = document.getElementById("farenheit-temp");
+    // }
+    // static listenOnFarenheitInput() {
+
+    // }
+    static listenOnCelciusInput() {
+        const celciusInput = document.getElementById("celcius-temp");
+        celciusInput.addEventListener('change', this.farenheitEvent)
+        this.farenheitEvent();
+    }
+    static farenheitEvent() {
+        const farenheitBtn = document.getElementById("temp-button");
+        farenheitBtn.addEventListener('click', this.handleFarenheitEvent);
+    }
+    static handleFarenheitEvent(e) {
+        e.preventDefault();
+        const tempObj = DomManager.createFarenheitObj();
+        const celcius = tempObj.celcius;
+        const farenheit = tempObj.farenheit;
+        DomManager.displayResults(celcius, farenheit);
+    }
+    static createFarenheitObj() {
+        const celciusInput = document.getElementById("celcius-temp");
+        const tempObj = new Temperature(celciusInput.value);
+        console.log(tempObj);
+        return tempObj;
+    }
+    static displayResults(celcius, farenheit) {
+        return document.getElementById("results").innerText = `Celcius : ${celcius} | Farenheit : ${farenheit}`;
+    }
 }
-initApp();
+DomManager.listenOnCelciusInput();
 
 
 
