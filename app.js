@@ -19,7 +19,7 @@ class DomManager {
     }
 
     static displayResults(celcius, farenheit) {
-        return document.getElementById("results").innerText = `Celcius : ${celcius} | Farenheit : ${farenheit}`;
+        return document.getElementById("results").innerText = `Farenheit : ${farenheit} | Celcius : ${celcius}`;
     }
 }
 function handleClick(e) {
