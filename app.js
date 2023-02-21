@@ -13,30 +13,27 @@ class Temperature {
     }
 }
 class DomManager {
-    static listenOnButton() {
+    static listenOnButton(handleClick) {
         const btn = document.getElementById("temp-button");
-        btn.addEventListener('click', this.handleClick)
+        btn.addEventListener('click', handleClick)
     }
-    static handleClick(e) {
-        e.preventDefault();
-        const celciusInput = document.getElementById("celcius-temp");
-        const farenheitInput = document.getElementById("farenheit-temp");
-        const tempObj = DomManager.createObj(celciusInput, farenheitInput);
-        const { celcius, farenheit } = tempObj;
-        DomManager.displayResults(celcius, farenheit);
-        celciusInput.value = '';
-        farenheitInput.value = '';
-    }
-    static createObj(celciusInput, farenheitInput) {
-        let tempObj;
-        tempObj = celciusInput.value !== '' ? new Temperature(celciusInput.value) : Temperature.fromFarenheit(farenheitInput.value);
-        return tempObj
-    }
+
     static displayResults(celcius, farenheit) {
         return document.getElementById("results").innerText = `Celcius : ${celcius} | Farenheit : ${farenheit}`;
     }
 }
-DomManager.listenOnButton();
+function handleClick(e) {
+    e.preventDefault();
+    const celciusInput = document.getElementById("celcius-temp");
+    const farenheitInput = document.getElementById("farenheit-temp");
+    const tempObj = celciusInput.value !== '' ? new Temperature(celciusInput.value) : Temperature.fromFarenheit(farenheitInput.value)
+    const { celcius, farenheit } = tempObj;
+    DomManager.displayResults(celcius, farenheit);
+    celciusInput.value = '';
+    farenheitInput.value = '';
+}
+DomManager.listenOnButton(handleClick);
+
 
 
 
